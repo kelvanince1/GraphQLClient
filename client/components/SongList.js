@@ -6,11 +6,16 @@ import { Link } from 'react-router';
 import query from '../queries/fetchSongs';
 
 class SongList extends Component {
+  onSongDelete(id) {
+    this.props.mutate({ variables: { id: id } })
+  }
+
   renderSongs() {
       return this.props.data.songs.map(song => {
         return (
           <li key={song.id} className='collectionItem'>
             {song.title}
+            <i className="material-icons" onClick={() => this.onSongDelete(song.id)}>delete</i>
           </li>
         );
       });
@@ -26,7 +31,7 @@ class SongList extends Component {
           {this.renderSongs()}
         </ul>
         <Link to="/songs/new" className="btn-floating btn-large red right">
-          <i className="material-icons">Add</i>
+          <i className="material-icons">add</i>
         </Link>
       </div>
 
