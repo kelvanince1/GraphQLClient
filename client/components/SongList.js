@@ -8,6 +8,7 @@ import query from '../queries/fetchSongs';
 class SongList extends Component {
   onSongDelete(id) {
     this.props.mutate({ variables: { id: id } })
+      .then(() => this.props.data.refetch())
   }
 
   renderSongs() {
